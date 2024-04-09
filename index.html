@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Eid card Generator</title>
+ <link rel="stylesheet" href="css/styles.css">
+ </head>
+ <body>
+   <div class="page-wrap">
+     <h1 style="text-align: center;">معايده علي</h1>
+     <div class="controls">
+       <label class="controls__label" for="name">أدخل اسمك</label>
+       <input class="controls__input" id="name" type="text" value="علي الحربي" placeholder="Enter your name here" required />
+     </div>
+     <button id="generateBtn">اضغط هنا</button>
+   </div>
+ 
+ <script>
+ document.getElementById('generateBtn').onclick = function() {
+     var name = document.getElementById('name').value;
+     var imageUrl = 'https://i.ibb.co/yW1xwx0/IMG-4173.png'; 
+     renderImageWithText(name, imageUrl);
+ }
+ 
+ function renderImageWithText(text, imageUrl) {
+     var imgElement = document.createElement('img');
+     imgElement.crossOrigin = 'anonymous'; 
+     imgElement.src = imageUrl;
+ 
+     imgElement.onload = function() {
+         var canvas = document.createElement('canvas');
+         var ctx = canvas.getContext('2d');
+         canvas.width = imgElement.width;
+         canvas.height = imgElement.height;
+         ctx.drawImage(imgElement, 0, 0);
+         ctx.font = '32px myFirstFont';
+        ctx.fillStyle = '#39485B'; 
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(text, 302, 870);
+
+        canvas.toBlob(function(blob) {
+            const newImgUrl = URL.createObjectURL(blob);
+            window.location.href = newImgUrl;
+        });
+     }; 
+ }
+ </script>
+  
+ </body>
+ </html>
